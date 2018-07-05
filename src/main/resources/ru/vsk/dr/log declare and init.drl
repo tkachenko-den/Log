@@ -1,2 +1,16 @@
 package ru.vsk.dr;
 
+// Используем log4j
+import org.apache.log4j.Logger;
+
+// Объявляем глобальную переменную
+global org.apache.log4j.Logger log;
+
+// Инициализируем log если не инициализирован
+rule "init log global variable"
+    salience 9999999999
+when
+    eval (log == null)
+then
+    drools.getWorkingMemory().setGlobal("log", Logger.getLogger("ru.vsk.dr"));
+end
